@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/import', [\App\Http\Controllers\UsersImportController::class, 'import'])->name('import');
+
+Route::post('/import', [\App\Http\Controllers\UsersImportController::class, 'store'])->name('store');
+
+Route::get('/result', [\App\Http\Controllers\UsersImportController::class, 'store'])->name('result');
