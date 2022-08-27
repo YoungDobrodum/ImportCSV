@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImportFileRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsersImportController extends Controller
 {
@@ -13,10 +15,8 @@ class UsersImportController extends Controller
         return view('import');
     }
 
-
     public function store(ImportFileRequest $request)
     {
-
         $file = file($request->file->getRealPath());
         $data = array_slice($file, 1);
         $fileName = resource_path('templates/' . date('y-m-d-H-i-s') . '.csv');
@@ -24,9 +24,9 @@ class UsersImportController extends Controller
 
         session()->flash('status', 'Importing...');
 
-        $tempFile = fopen($fileName, "r");
-        $data = fgetcsv($tempFile, null, ',');
-        dd($data);
+        (new User)->importToDb();
         return redirect('import');
     }
+
+
 }

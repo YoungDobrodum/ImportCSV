@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -18,9 +19,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'UID',
+        'Name',
+        'Age',
+        'Email',
+        'Phone',
+        'Gender',
     ];
 
     /**
@@ -29,8 +33,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+
     ];
 
     /**
@@ -39,6 +42,38 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+
     ];
+
+    /**
+     * File type conversion, writing to database, deleting temporary file
+     * @return void
+     */
+    public function importToDb()
+    {
+        $path = resource_path('templates/*.csv');
+        $g = glob($path);
+
+        foreach (array_slice($g, 0) as $file) {
+            $data = array_map('str_getcsv', file($file));
+
+            foreach ($data as $row) {
+                DB::table('Users')->upsert([
+                    [
+                        'UID' => $row[0],
+                        'Name' => $row[1],
+                        'Age' => $row[2],
+                        'Email' => $row[3],
+                        'Phone' => $row[4],
+                        'Gender' => $row[5],
+                    ]
+                ],
+                    [],
+                    ['UID', 'Name', 'Age', 'Email', 'Phone', 'Gender']
+                );
+            }
+            unlink($file);
+        }
+    }
+
 }

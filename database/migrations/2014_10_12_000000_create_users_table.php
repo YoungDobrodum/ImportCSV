@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('Name');
             $table->string('Age');
             $table->string('Email');
-            $table->decimal('Phone');
+            $table->bigInteger('Phone');
             $table->string('Gender');
         });
     }
