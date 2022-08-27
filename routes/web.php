@@ -17,4 +17,6 @@ Route::get('/import', [\App\Http\Controllers\Import\UsersImportController::class
 
 Route::post('/import', [\App\Http\Controllers\Import\UsersImportController::class, 'store'])->name('store');
 
-Route::get('/result', [\App\Http\Controllers\Import\UsersImportController::class, 'store'])->name('result');
+Route::get('/result', [\App\Http\Controllers\Import\UsersImportController::class, 'show'])->name('result');
+
+Route::delete('/import', [\App\Http\Controllers\Import\UsersImportController::class, 'destroy'])->name('destroy');

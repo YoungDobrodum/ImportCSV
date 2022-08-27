@@ -23,5 +23,16 @@ class UsersImportController extends BaseController
         return redirect('import');
     }
 
+    public function show()
+    {
+        return view('result');
+    }
+
+    public function destroy()
+    {
+        User::getQuery()->delete();
+        return redirect()->route('import');
+    }
+
 
 }

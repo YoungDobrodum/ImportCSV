@@ -18,8 +18,9 @@
     <button type="submit" class="md-3 btn btn-primary">Import</button>
     <a class="col-4" href="{{route('result')}}">View results</a>
 </form>
-<form action="#" class="col-4">
+<form action="{{route('destroy')}}" method="POST" class="col-4">
     @csrf
+    @method('DELETE')
     <button type="submit" class="btn btn-danger">Clear all records</button>
 </form>
 
