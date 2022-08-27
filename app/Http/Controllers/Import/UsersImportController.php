@@ -20,12 +20,13 @@ class UsersImportController extends BaseController
         $file = file($request->file->getRealPath());
         $this->service->store($file);
         (new User)->importToDb();
-        return redirect('import');
+        return redirect('import')->with('success','Success');
     }
 
     public function show()
     {
-        return view('result');
+        $data = User::all();
+        return view('result', compact('data'));
     }
 
     public function destroy()

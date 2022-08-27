@@ -12,8 +12,12 @@
 <form action="{{route('store')}}" method="POST" enctype="multipart/form-data" class="col-4 mb-3">
     @csrf
     <div class="mb-3">
+        @if(session('success'))
+            <div class="text-success">{{session('success')}}</div>
+        @endif
         <label for="formFile" class="form-label">Please, select the required CSV file</label>
         <input class="form-control" type="file" name="file">
+
     </div>
     <button type="submit" class="md-3 btn btn-primary">Import</button>
     <a class="col-4" href="{{route('result')}}">View results</a>
