@@ -49,31 +49,6 @@ class User extends Authenticatable
      * File type conversion, writing to database, deleting temporary file
      * @return void
      */
-    public function importToDb()
-    {
-        $path = resource_path('templates/*.csv');
-        $g = glob($path);
 
-        foreach (array_slice($g, 0) as $file) {
-            $data = array_map('str_getcsv', file($file));
-
-            foreach ($data as $row) {
-                DB::table('Users')->upsert([
-                    [
-                        'UID' => $row[0],
-                        'Name' => $row[1],
-                        'Age' => $row[2],
-                        'Email' => $row[3],
-                        'Phone' => $row[4],
-                        'Gender' => $row[5],
-                    ]
-                ],
-                    [],
-                    ['UID', 'Name', 'Age', 'Email', 'Phone', 'Gender']
-                );
-            }
-            unlink($file);
-        }
-    }
 
 }

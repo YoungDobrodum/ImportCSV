@@ -10,7 +10,7 @@ use function view;
 class UsersImportController extends BaseController
 {
 
-    public function import()
+    public function index()
     {
         return view('import');
     }
@@ -19,7 +19,7 @@ class UsersImportController extends BaseController
     {
         $file = file($request->file->getRealPath());
         $this->service->store($file);
-        (new User)->importToDb();
+        $this->service->importToDb();
         return redirect('import')->with('success','Success');
     }
 
@@ -34,6 +34,4 @@ class UsersImportController extends BaseController
         User::getQuery()->delete();
         return redirect()->route('import');
     }
-
-
 }

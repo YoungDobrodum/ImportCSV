@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/import', [\App\Http\Controllers\Import\UsersImportController::class, 'import'])->name('import');
+Route::get('/import', [\App\Http\Controllers\Import\UsersImportController::class, 'index'])->name('import');
 
 Route::post('/import', [\App\Http\Controllers\Import\UsersImportController::class, 'store'])->name('store');
 

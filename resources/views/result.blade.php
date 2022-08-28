@@ -6,10 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body>
-    <a href="{{route('import')}}" class="button">Import data</a>
+<a href="{{route('import')}}" class="button">Import data</a>
+
     <table class="table table-hover table-dark">
         <thead>
         <tr>
@@ -23,14 +25,14 @@
         </thead>
         <tbody>
         @foreach($data as $item)
-        <tr>
-            <th>{{$item->UID}}</th>
-            <td>{{$item->Name}}</td>
-            <td>{{$item->Age}}</td>
-            <td>{{$item->Email}}</td>
-            <td>{{$item->Phone}}</td>
-            <td>{{$item->Gender}}</td>
-        </tr>
+            <tr>
+                <th>{{$item->UID}}</th>
+                <td>{{$item->Name}}</td>
+                <td>{{$item->Age}}</td>
+                <td>{{$item->Email}}</td>
+                <td>{{$item->Phone}}</td>
+                <td>{{$item->Gender}}</td>
+            </tr>
         @endforeach
         </tbody>
     </table>
